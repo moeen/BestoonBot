@@ -31,7 +31,7 @@ class b3_start():
         print "Token\t\t\t:\t" + self.token
         print "Checking principal.conf\t:\t" + conf.configCheck()
         print "Connecting To DB\t:\t" + mysql.mysql_check(self.db_host, self.db_username, self.db_password, self.db_name)
-        print "Principal Bot Started, Now Let's Get To Work!"
+        print "Bestoon Bot Started, Now Let's Get To Work!"
         updater = Updater(self.token)
         updater.start_polling()
         updater.idle()
