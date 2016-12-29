@@ -1,6 +1,12 @@
 #!/usr/bin/python
 # -*- Coding: UTF-8 -*-
 
+#################################################################
+#	This File Would Be Removed Or Changed In Future.	#
+#								#
+#								#
+#################################################################
+
 from telegram.ext import Updater, CommandHandler
 
 class starter():
