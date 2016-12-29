@@ -11,7 +11,7 @@ from telegram.ext import Updater, CommandHandler
 
 class starter():
     def __init__(self):
-        self.updater = Updater("314422742:AAGHhiY7X0V2axzGdZz6dydEF1mcB8N_GJI")
+        self.updater = Updater("TOKEN")
 
     def start_method(self, bot, update):
         print "Log: start Method Executed"

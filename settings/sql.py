@@ -9,9 +9,9 @@ class MySQL:
 
     def mysql_check(self, host, user, password, db_name):
         try:
-            self.db = MySQLdb.connect(host=host, user=user, passwd=password)
-            self.cursor = db.cursor()
-            self.cursor.execute("USE " + db_name + ";" \
+            db = MySQLdb.connect(host=host, user=user, passwd=password, db=db_name)
+            cursor = db.cursor()
+            cursor.execute("USE " + db_name + ";" \
                 + "CREATE TABLE IF NOT EXISTS`group` (`join_status` int(10) unsigned NOT NULL,`sticker` int(10) unsigned NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;"\
                 + "LOCK TABLES `group` WRITE;"\
                 + "UNLOCK TABLES;"\
@@ -44,4 +44,4 @@ class MySQL:
             cursor = db.cursor()
             cursor.execute(query)
         except:
-            print "Error Executi Query."
+            print "Error Executing Query In sql.py: sql_query()."
