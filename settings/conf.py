@@ -28,11 +28,11 @@ class conf:
         return self.ConfigSectionMap(section,address)[config].strip("\"")
 
     def configCheck(self):
-        if os.path.isfile("b3/conf.ini"):
+        if os.path.isfile("bestoon/conf.ini"):
             return "OK"
         else:
             return "FAILED"
 
     def token(self):
-        self.token = self.configParser("b3", "b3/conf.ini", "updater")
+        self.token = self.configParser("bot", "bestoon/conf.ini", "updater")
         return self.token
