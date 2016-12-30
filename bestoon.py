@@ -6,15 +6,15 @@ from settings.conf import conf
 from settings.sql import MySQL
 
 import os
-class b3_start():
+class Bot_start():
     def __init__(self):
         self.token = conf.token()
 
         try:
-            self.db_host = conf.ConfigSectionMap("database", "b3/conf.ini")["host"].strip("\"")
-            self.db_username = conf.ConfigSectionMap("database", "b3/conf.ini")["user"].strip("\"")
-            self.db_password = conf.ConfigSectionMap("database", "b3/conf.ini")["password"].strip("\"")
-            self.db_name = conf.ConfigSectionMap("database", "b3/conf.ini")["db_name"].strip("\"")
+            self.db_host = conf.ConfigSectionMap("database", "settings/conf.ini")["host"].strip("\"")
+            self.db_username = conf.ConfigSectionMap("database", "settings/conf.ini")["user"].strip("\"")
+            self.db_password = conf.ConfigSectionMap("database", "settings/conf.ini")["password"].strip("\"")
+            self.db_name = conf.ConfigSectionMap("database", "settings/conf.ini")["db_name"].strip("\"")
         except:
             print "exception"
             self.db_host = None
@@ -39,5 +39,5 @@ class b3_start():
 
 if __name__ == "__main__":
     conf = conf()
-    run = b3_start()
+    run = Bot_start()
     run.main()
