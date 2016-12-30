@@ -11,9 +11,7 @@ class MySQL:
         try:
             db = MySQLdb.connect(host=host, user=user, passwd=password, db=db_name)
             cursor = db.cursor()
-            if cursor.execute("SELECT * FROM information_schema.tables WHERE TABLE_SCHEMA=\'%s\' ;" % db_name) == 0:
-                cursor.execute("CREATE SCHEMA \'%s\' ;")
-
+            
             if cursor.execute("SELECT * FROM information_schema.tables WHERE TABLE_NAME = 'users' AND TABLE_SCHEMA=\'%s\' ;" % db_name) == 0:
                 cursor.execute("USE " + db_name + ";"\
                     + "CREATE TABLE IF NOT EXISTS`users` ("\
