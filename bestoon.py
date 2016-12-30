@@ -4,8 +4,8 @@
 from telegram.ext import Updater
 from settings.conf import conf
 from settings.sql import MySQL
-
 import os
+from bestoon import *
 class Bot_start():
     def __init__(self):
         self.token = conf.token()
