@@ -38,7 +38,4 @@ if __name__ == "__main__":
     conf = conf()
     run = Bot_start()
     run.main()
-    updater = Updater(str(conf.token))
-    import bestoon.Plugins.start
-    updater.start_polling()
-    updater.idle()
+    import bestoon.Plugins
