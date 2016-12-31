@@ -1,13 +1,10 @@
 .
 ├── bestoon
 │   ├── __init__.py
-│   ├── __init__.pyc
 │   └── Plugins
 │       ├── __init__.py
-│       ├── __init__.pyc
 │       └── start
-│           ├── __init__.py
-│           └── __init__.pyc
+│           └── __init__.py
 ├── bestoon.py
 ├── LICENSE
 ├── README.md
@@ -15,12 +12,8 @@
 ├── settings
 │   ├── conf.ini
 │   ├── conf.py
-│   ├── conf.pyc
 │   ├── conf-sample.ini
-│   ├── __init__.py
-│   ├── __init__.pyc
 │   ├── sql.py
-│   └── sql.pyc
 └── tree.txt
 
-4 directories, 19 files
+4 directories, 21 files
