@@ -10,11 +10,10 @@
 ├── README.md
 ├── requirement.txt
 ├── settings
-│   ├── conf.ini
 │   ├── conf.py
 │   ├── conf-sample.ini
 │   ├── __init__.py
 │   └── sql.py
 └── tree.txt
 
-4 directories, 13 files
+4 directories, 12 files
