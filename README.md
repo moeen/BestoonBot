@@ -1,6 +1,6 @@
 # BestoonBot
 
-The Original Repo Is Now On Gitlab (`https://gitlab.com/AlirezaieS/BestoonBot`) As I Won't Continue It On Github Anymore :)
+__We Will Migrate To Gitlab Soon :)__
 
 A Telegram Bot For Bestoon Project By Jadi.
 

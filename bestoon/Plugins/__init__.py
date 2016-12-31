@@ -1,6 +1,9 @@
 #!/usr/bin/python
 # -*- Coding : UTF-8 -*-
 
+# PLEASE DEFINE YOUR `CommandHandler` AND `add_handler` OF EACH METHOD, RIGHT BELOW IT.
+# PLEASE ADD YOUR PLUGINS INSIDE `extPlugins` AS I DON'T MERGE ANY THIRD PARTY PLUGINS INSIDE DEFAULT PLUGINS
+
 from telegram.ext import Updater, CommandHandler
 from settings.conf import conf
 
@@ -13,16 +16,16 @@ def start_method(bot, update):
     bot.sendChatAction(chat_id, "TYPING")
     bot.sendMessage(chat_id, "Hello")
 
+start_command = CommandHandler("start", start_method)
+updater.dispatcher.add_handler(start_command)
+
 def bye_method(bot, update):
-    """ Start Command """
+    """ Goodbye Command """
     chat_id = update.message.chat_id
     bot.sendChatAction(chat_id, "TYPING")
     bot.sendMessage(chat_id, "Goodbye!")
 
-########## Define Commands Here ##########
 goodbye_command = CommandHandler("bye", bye_method)
-start_command = CommandHandler("start", start_method)
-updater.dispatcher.add_handler(start_command)
 updater.dispatcher.add_handler(goodbye_command)
 
 ########## Starting Bot ##########
