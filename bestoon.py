@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- Coding: UTF-8 -*-
-#TODO: Running Plugins Easily Inside This File
+
 from telegram.ext import Updater,CommandHandler
 from settings.conf import conf
 from settings.sql import MySQL
@@ -35,9 +35,10 @@ class Bot_start():
         print "Token\t\t\t:\t" + self.token
 
         if conf.configCheck() == "OK":
-            print "Checking principal.conf\t:\t" + conf.configCheck()
+            print "Checking Config File\t:\t" + conf.configCheck()
+
         else:
-            print "Checking principal.conf\t:\t" + conf.configCheck()
+            print "Checking Config File\t:\t" + conf.configCheck()
             sys.exit(0)
 
         sql_check = mysql.mysql_check(self.db_host, self.db_username, self.db_password, self.db_name)

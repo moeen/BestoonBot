@@ -3,7 +3,7 @@
 
 # PLEASE DEFINE YOUR `CommandHandler` AND `add_handler` OF EACH METHOD, RIGHT BELOW IT.
 # PLEASE ADD YOUR PLUGINS INSIDE `extPlugins` AS I DON'T MERGE ANY THIRD PARTY PLUGINS INSIDE DEFAULT PLUGINS
-
+from telegram import ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler
 from settings.conf import conf
 
@@ -12,9 +12,14 @@ updater = Updater(str(conf.token()))
 
 def start_method(bot, update):
     """ Start Command """
+    startList = [["Register New Account","Integrate A Registered Account"]]
     chat_id = update.message.chat_id
+    text = """Hello And Welcome To [Bestoon](http://bestoon.ir).
+This Bot Helps You Easily Access Your [Bestoon](http://bestoon.ir) Account.
+Now, How Can I Help You?
+"""
     bot.sendChatAction(chat_id, "TYPING")
-    bot.sendMessage(chat_id, "Hello")
+    bot.sendMessage(chat_id, text, parse_mode="Markdown", reply_markup=ReplyKeyboardMarkup(startList, one_time_keyboard=True))
 
 start_command = CommandHandler("start", start_method)
 updater.dispatcher.add_handler(start_command)
