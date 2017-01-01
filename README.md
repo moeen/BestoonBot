@@ -1,5 +1,11 @@
 # BestoonBot
 
-__This Is A Template For Creating Bot For Telegram Using [`python-telegram-bot`](https://github.com/python-telegram-bot/python-telegram-bot)__
+__This Project Is Under Development And NOT Ready To Use.__
 
-__The `Bestoon` Income/Expence Bot Has Been Migrated To [Gitlab](https://gitlab.com/Alirezais/BestoonBot), For Further Information About Income/Expense Bot Follow My [Gitlab](https://gitlab.com/Alirezais/BestoonBot).__
+A Telegram Bot For `Bestoon` Project By [Jadi](http://jadi.net).
+
+Read The `requirement.txt` For The Packages To Install.
+
+Rename `conf-sample.ini` To `conf.ini`, The `token` Section Includes The `Telegram Bot` Token, Not The Token From `Bestoon` :)
+
+You Need To Create A `MySQL` Database Manually.
