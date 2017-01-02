@@ -30,7 +30,11 @@ class MySQL:
             return "OK"
         except:
             return "FAILED"
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 725e1b28644f5a54c3a4d8966bb02294f0ef7554
     def sql_query(self, host, user, password, db_name, query):
         try:
             db = MySQLdb.connect(host=host, user=user, passwd=password, db=db_name)
