@@ -18,7 +18,6 @@ class Bot_start():
             self.db_name = conf.ConfigSectionMap("database", "settings/conf.ini")["db_name"].strip("\"")
 
         except:
-            print "exception"
             self.db_host = None
             self.db_username = None
             self.db_password = None

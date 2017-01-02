@@ -8,6 +8,14 @@ from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
 from settings.conf import conf
 
+import logging
+
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+
+logger = logging.getLogger(__name__)
+
 conf = conf()
 updater = Updater(str(conf.token()))
 SETUP ,USERNAME = range(2)
@@ -17,6 +25,7 @@ def start_method(bot, update):
 
     startList = [["Register New Account","Integrate An Account"]]
 
+    global chat_id
     chat_id = update.message.chat_id
     replyText = update.message.text
 
@@ -30,8 +39,6 @@ Now, How Can I Help You?
 
 def setup(bot, update):
     """Initialize The User Account For The First Time"""
-    chat_id = update.message.chat_id
-
     if update.message.text == "Register New Account":
         bot.sendChatAction(chat_id, "TYPING")
         register_text = """Ok.
@@ -52,8 +59,7 @@ Now Send Me Your Bestoon Username.
         update.message.reply_text("Invalid Command!")
 
 def regUser(bot, Update):
-    chat_id = update.message.chat_id
-    bot.sendChatAction("chat_id", "TYPING")
+    bot.sendChatAction(chat_id, "TYPING")
     update.message.reply_text("Registering Your Username")
     return ConversationHandler.END
 
