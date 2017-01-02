@@ -3,6 +3,7 @@
 
 # PLEASE DEFINE YOUR `CommandHandler` AND `add_handler` OF EACH METHOD, RIGHT BELOW IT.
 # PLEASE ADD YOUR PLUGINS INSIDE `extPlugins` AS I DON'T MERGE ANY THIRD PARTY PLUGINS INSIDE DEFAULT PLUGINS
+
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
 from settings.conf import conf
@@ -10,6 +11,7 @@ from settings.conf import conf
 conf = conf()
 updater = Updater(str(conf.token()))
 SETUP , REGISTER, INTEGRATE = range(3)
+
 def start_method(bot, update):
     """ Start Command """
 
