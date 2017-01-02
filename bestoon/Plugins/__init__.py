@@ -6,8 +6,9 @@
 
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
+from contextlib import closing
 from settings.conf import conf
-
+from settings.sql import MySQL
 import logging
 
 # Enable logging
@@ -17,9 +18,10 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 conf = conf()
+sql = MySQL()
 updater = Updater(str(conf.token()))
-SETUP ,USERNAME = range(2)
-
+SETUP ,USERNAME , EMAIL = range(3)
+infp = []
 def start_method(bot, update):
     """ Start Command """
 
@@ -39,7 +41,7 @@ Now, How Can I Help You?
 
 def setup(bot, update):
     """Initialize The User Account For The First Time"""
-    if update.message.text == "Register New Account":
+    if update.message.text == ""Integrate An Account":
         bot.sendChatAction(chat_id, "TYPING")
         register_text = """Ok.
 Now Send Me Your Bestoon Username.
@@ -48,7 +50,7 @@ Now Send Me Your Bestoon Username.
         print "Going For Username"
         return USERNAME
 
-    elif update.message.text == "Integrate An Account":
+    elif update.message.text == "Register New Account":
         bot.sendChatAction(chat_id, "TYPING")
         update.message.reply_text("Sorry, Can\'t Integrate Now!", reply_markup=ReplyKeyboardRemove())
         bot.sendMessage(update.message.chat_id, "Bye!")
@@ -59,10 +61,7 @@ Now Send Me Your Bestoon Username.
         update.message.reply_text("Invalid Command!")
 
 def regUser(bot, update):
-    bot.sendChatAction(chat_id, "TYPING")
-    update.message.reply_text("Registering Your Username")
-    return ConversationHandler.END
-
+    pass #TODO: Need To Be Written
 def cancel(bot, update):
     bot.sendMessage(update.message.chat_id, "Bye!")
     return ConversationHandler.END
@@ -72,8 +71,8 @@ conv_handler = ConversationHandler(
 
     states = {
         SETUP: [MessageHandler(Filters.text, setup)],
-        USERNAME: [MessageHandler(Filters.text, regUser),
-                    CommandHandler("cancel",cancel)]
+        USERNAME: [MessageHandler(Filters.text, regUser)],
+
 
     },
 

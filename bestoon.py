@@ -9,7 +9,6 @@ import os, sys
 class Bot_start():
     def __init__(self):
         self.token = conf.token()
-        self.flag =[]
 
         try:
             self.db_host = conf.ConfigSectionMap("database", "settings/conf.ini")["host"].strip("\"")
