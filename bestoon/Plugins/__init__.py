@@ -10,7 +10,7 @@ from settings.conf import conf
 
 conf = conf()
 updater = Updater(str(conf.token()))
-SETUP , REGISTER, INTEGRATE = range(3)
+SETUP ,USERNAME = range(2)
 
 def start_method(bot, update):
     """ Start Command """
@@ -34,26 +34,47 @@ def setup(bot, update):
 
     if update.message.text == "Register New Account":
         bot.sendChatAction(chat_id, "TYPING")
-        update.message.reply_text("Can\'t Register Now!")
+        register_text = """Ok.
+Now Send Me Your Bestoon Username.
+"""
+        update.message.reply_text(register_text,reply_markup=ReplyKeyboardRemove())
+        print "Going For Username"
+        return USERNAME
 
-    elif update.message.text == "Integrate A Registered Account":
+    elif update.message.text == "Integrate An Account":
         bot.sendChatAction(chat_id, "TYPING")
-        update.message.reply_text("Can\'t Integrate Now!")
+        update.message.reply_text("Sorry, Can\'t Integrate Now!", reply_markup=ReplyKeyboardRemove())
+        bot.sendMessage(update.message.chat_id, "Bye!")
+        return ConversationHandler.END
 
-def bye(bot, update):
-    bot.sendMessage(update.message.chat_id, "bye!")
+    else:
+        bot.sendChatAction(chat_id, "TYPING")
+        update.message.reply_text("Invalid Command!")
+
+def regUser(bot, Update):
+    chat_id = update.message.chat_id
+    bot.sendChatAction("chat_id", "TYPING")
+    update.message.reply_text("Registering Your Username")
+    return ConversationHandler.END
+
+def cancel(bot, update):
+    bot.sendMessage(update.message.chat_id, "Bye!")
+    return ConversationHandler.END
 
 conv_handler = ConversationHandler(
     entry_points = [CommandHandler('start', start_method)],
 
     states = {
-        SETUP: [MessageHandler(Filters.text, setup)]
+        SETUP: [MessageHandler(Filters.text, setup)],
+        USERNAME: [MessageHandler(Filters.text, regUser),
+                    CommandHandler("cancel",cancel)]
 
     },
 
-    fallbacks = [CommandHandler('cancel', bye)]
+    fallbacks = [CommandHandler('cancel', cancel)]
 )
 updater.dispatcher.add_handler(conv_handler)
+
 ########## Starting Bot ##########
 updater.start_polling()
 updater.idle()
