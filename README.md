@@ -1,6 +1,6 @@
 # BestoonBot
 
-![build](https://img.shields.io/teamcity/http/teamcity.jetbrains.com/s/bt345.svg)
+![build](https://img.shields.io/badge/build-development-orange.svg)
 ![coverage](https://img.shields.io/badge/coverage-50%25-yellowgreen.svg)
 ![python](https://img.shields.io/badge/python-2.7-blue.svg)
 ![python-telegram-bot](https://img.shields.io/badge/python--telegram--bot-5.3.0-blue.svg)
@@ -12,7 +12,7 @@
 
 __This Project Is Under Development And NOT Ready To Use.__
 
-A [Telegram](https://telegram.org) Bot For `[Bestoon](http://bestoon.ir)` Project By [Jadi](http://jadi.net).
+A [Telegram](https://telegram.org) Bot For [Bestoon](http://bestoon.ir) Project By [Jadi](http://jadi.net).
 
 Read The `requirement.txt` For The Packages To Install.
 
