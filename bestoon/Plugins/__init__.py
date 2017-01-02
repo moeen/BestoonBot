@@ -13,7 +13,7 @@ SETUP , REGISTER, INTEGRATE = range(3)
 def start_method(bot, update):
     """ Start Command """
 
-    startList = [["Register New Account","Integrate A Registered Account"]]
+    startList = [["Register New Account","Integrate An Account"]]
 
     chat_id = update.message.chat_id
     replyText = update.message.text
