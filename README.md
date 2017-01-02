@@ -12,7 +12,7 @@
 
 __This Project Is Under Development And NOT Ready To Use.__
 
-A [Telegram](https://telegram.org) Bot For `Bestoon` Project By [Jadi](http://jadi.net).
+A [Telegram](https://telegram.org) Bot For `[Bestoon](http://bestoon.ir)` Project By [Jadi](http://jadi.net).
 
 Read The `requirement.txt` For The Packages To Install.
 
