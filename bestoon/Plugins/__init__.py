@@ -58,7 +58,7 @@ Now Send Me Your Bestoon Username.
         bot.sendChatAction(chat_id, "TYPING")
         update.message.reply_text("Invalid Command!")
 
-def regUser(bot, Update):
+def regUser(bot, update):
     bot.sendChatAction(chat_id, "TYPING")
     update.message.reply_text("Registering Your Username")
     return ConversationHandler.END
