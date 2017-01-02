@@ -29,9 +29,7 @@ class MySQL:
             return "OK"
         except:
             return "FAILED"
-#INSERT INTO `bestoon`.`users` (`id`, `tg_id`, `username`, `email`, `token`, `password`) VALUES ('1', '140301737', 'AlirezaieS', 'alirezaie.sadegh@gmail.com', '3YS4fVd1iuTZfS2lX3Z6nQYMFKos9GjaWSH0oEdneEzElLt2', 'AssH0l3');
-#INSERT INTO `bestoon`.`users` (`tg_id`, `username`, `email`, `token`, `password`) VALUES ('140301737', 'AlirezaieS', 'alirezaie.sadegh@gmail.com', '3YS4fVd1iuTZfS2lX3Z6nQYMFKos9GjaWSH0oEdneEzElLt2', 'AssH0l3');
-
+        
     def sql_query(self, host, user, password, db_name, query):
         try:
             db = MySQLdb.connect(host=host, user=user, passwd=password)
