@@ -1,4 +1,4 @@
-.
+BestoonBot
 ├── bestoon
 │   ├── extPlugins
 │   │   └── __init__.py

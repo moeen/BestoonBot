@@ -41,13 +41,12 @@ Now, How Can I Help You?
 
 def setup(bot, update):
     """Initialize The User Account For The First Time"""
-    if update.message.text == ""Integrate An Account":
+    if update.message.text == "Integrate An Account":
         bot.sendChatAction(chat_id, "TYPING")
         register_text = """Ok.
 Now Send Me Your Bestoon Username.
 """
         update.message.reply_text(register_text,reply_markup=ReplyKeyboardRemove())
-        print "Going For Username"
         return USERNAME
 
     elif update.message.text == "Register New Account":

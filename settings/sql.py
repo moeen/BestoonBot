@@ -36,5 +36,6 @@ class MySQL:
             cursor = db.cursor()
             cursor.execute(query)
             db.close()
+            
         except:
             print "Error Executing Query In sql.py: sql_query()."
