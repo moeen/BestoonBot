@@ -20,11 +20,18 @@ logger = logging.getLogger(__name__)
 conf = conf()
 sql = MySQL()
 updater = Updater(str(conf.token()))
-SETUP ,USERNAME , EMAIL = range(3)
+SETUP ,USERNAME = range(2)
+info = []
+
+def info_a():
+    """ Writes User Data Into A File"""
+    file_name = str(str(info[0])+".txt")
+    with open ("bestoon/Plugins/tmp/%s" % file_name, mode="w") as f:
+        f.write(str(info[0]) + "," + str(info[1]))
+        f.close()
 
 def start_method(bot, update):
     """ Start Command """
-
     startList = [["Register New Account","Integrate An Account"]]
 
     global chat_id
@@ -42,9 +49,10 @@ Now, How Can I Help You?
 def setup(bot, update):
     """Initialize The User Account For The First Time"""
     if update.message.text == "Integrate An Account":
+        info.append(update.message.from_user.id)
         bot.sendChatAction(chat_id, "TYPING")
         register_text = """Ok.
-Now Send Me Your Bestoon Username.
+Now Send Me Your Token.
 """
         update.message.reply_text(register_text,reply_markup=ReplyKeyboardRemove())
         return USERNAME
@@ -60,10 +68,17 @@ Now Send Me Your Bestoon Username.
         update.message.reply_text("Invalid Command!")
 
 def regUser(bot, update):
-    #TODO: Issue With Using MySQLdb Inside Functions That Use `bot`, `update`
-    pass
+    txt = update.message.text
+    if len(str(txt)) == 48:
+        info.append(update.message.text.lower())
+        update.message.reply_text("Processing Your Request,Please Wait.")
+        info_a()
+    else:
+        update.message.reply_text("Sorry, This Token Is Invalid\nPlease Retry With A Valid Token.")
+
 
 def cancel(bot, update):
+    """ Cancel Command """
     bot.sendMessage(update.message.chat_id, "Bye!")
     return ConversationHandler.END
 
@@ -72,15 +87,13 @@ conv_handler = ConversationHandler(
 
     states = {
         SETUP: [MessageHandler(Filters.text, setup)],
-        USERNAME: [MessageHandler(Filters.text, regUser)],
-
+        USERNAME: [MessageHandler(Filters.text, regUser)]
 
     },
 
     fallbacks = [CommandHandler('cancel', cancel)]
 )
 updater.dispatcher.add_handler(conv_handler)
-
 ########## Starting Bot ##########
 updater.start_polling()
 updater.idle()

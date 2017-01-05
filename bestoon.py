@@ -6,9 +6,7 @@ from settings.conf import conf
 from settings.sql import MySQL
 import os, sys
 import MySQLdb
-print "going for fuck"
-MySQLdb.connect("localhost", "root", "#@Sad3ghA", "bestoon")
-print "fucked!"
+
 class Bot_start():
     def __init__(self):
         self.token = conf.token()

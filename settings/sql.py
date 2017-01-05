@@ -17,10 +17,7 @@ class MySQL:
                     + "CREATE TABLE IF NOT EXISTS`users` ("\
                     + "`id` int(10) unsigned NOT NULL AUTO_INCREMENT,"\
                     + "`tg_id` int(10) unsigned NOT NULL,"\
-                    + "`username` varchar(45) NOT NULL,"\
-                    + "`email` varchar(45) NOT NULL,"\
                     + "`token` varchar(45) NOT NULL,"\
-                    + "`password` varchar(45) NOT NULL,"\
                     + "PRIMARY KEY (`id`)"\
                     + ") ENGINE=InnoDB DEFAULT CHARSET=latin1;"\
                     + "LOCK TABLES `users` WRITE;"\
