@@ -21,7 +21,7 @@ conf = conf()
 sql = MySQL()
 updater = Updater(str(conf.token()))
 SETUP ,USERNAME , EMAIL = range(3)
-infp = []
+
 def start_method(bot, update):
     """ Start Command """
 
@@ -60,7 +60,8 @@ Now Send Me Your Bestoon Username.
         update.message.reply_text("Invalid Command!")
 
 def regUser(bot, update):
-    pass #TODO: Need To Be Written
+    #TODO: Issue With Using MySQLdb Inside Functions That Use `bot`, `update`
+
 def cancel(bot, update):
     bot.sendMessage(update.message.chat_id, "Bye!")
     return ConversationHandler.END

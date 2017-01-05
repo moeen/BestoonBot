@@ -25,7 +25,7 @@ class MySQL:
                     + ") ENGINE=InnoDB DEFAULT CHARSET=latin1;"\
                     + "LOCK TABLES `users` WRITE;"\
                     + "UNLOCK TABLES;")
-
+            db.commit()
             db.close()
             return "OK"
         except:
@@ -35,7 +35,8 @@ class MySQL:
             db = MySQLdb.connect(host=host, user=user, passwd=password, db=db_name)
             cursor = db.cursor()
             cursor.execute(query)
+            db.commit()
             db.close()
-            
+
         except:
             print "Error Executing Query In sql.py: sql_query()."
