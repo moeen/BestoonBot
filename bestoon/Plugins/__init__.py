@@ -67,16 +67,11 @@ Now Send Me Your Token.
 
 def regUser(bot, update):
     txt = update.message.text
-    print txt
-    print len(txt)
     if len(txt) == 48:
-        print info
         info.append(txt)
-        print "text appended"
         List = [["Finish"]]
         update.message.reply_text("Done! Now Send Me Finish To Send You Commands", reply_markup=ReplyKeyboardMarkup(List)),
         info_a()
-        print "done!"
         return DONE
     else:
         update.message.reply_text("Sorry, This Token Is Invalid\nPlease Retry With A Valid Token.")
@@ -86,7 +81,6 @@ def remove_user(bot, update):
     user = update.message.from_user
     if text.lower() == "yes":
         update.message.reply_text("Ok! Send Me New Token")
-        print info
         return USERNAME
     elif text.lower() == "no":
         update.message.reply_text("Ok! Using Old Token!")
@@ -97,9 +91,8 @@ def cancel(bot, update):
     bot.sendMessage(update.message.chat_id, "Bye!")
     return ConversationHandler.END
 def done(bot, update):
-    print "funv"
-    # bot.sendChatAction(update.message.chat_id, "TEYPING")
-    update.message.reply_text("You Can Now Use /income <value> and /expense <value> For Submiting Your Income And Expense.", reply_markup=ReplyKeyboardRemove())
+    bot.sendChatAction(update.message.chat_id, "TYPING")
+    update.message.reply_text("You Can Now Use /income <value> and /expense <value> For Submiting Your Income And Expense.", reply_markup=  ReplyKeyboardRemove())
     return BESTOON
 def expense(bot, update):
     bot.sendMessage(update.message.chat_id, "expense")
