@@ -61,6 +61,7 @@ Now Send Me Your Bestoon Username.
 
 def regUser(bot, update):
     #TODO: Issue With Using MySQLdb Inside Functions That Use `bot`, `update`
+    pass
 
 def cancel(bot, update):
     bot.sendMessage(update.message.chat_id, "Bye!")
