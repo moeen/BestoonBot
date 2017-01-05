@@ -6,19 +6,9 @@
 
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
-from contextlib import closing
 from settings.conf import conf
-from settings.sql import MySQL
-import logging
-
-# Enable logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
-
-logger = logging.getLogger(__name__)
 
 conf = conf()
-sql = MySQL()
 updater = Updater(str(conf.token()))
 SETUP ,USERNAME = range(2)
 info = []

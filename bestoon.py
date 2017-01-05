@@ -3,9 +3,7 @@
 
 from telegram.ext import Updater,CommandHandler
 from settings.conf import conf
-from settings.sql import MySQL
 import os, sys
-import MySQLdb
 
 class Bot_start():
     def __init__(self):
@@ -26,8 +24,7 @@ class Bot_start():
 
     def main(self):
         os.system("clear")
-        mysql = MySQL()
-
+        
         print "==============================="
         print "Starting Bestoon Bot!"
         print "==============================="
@@ -38,14 +35,6 @@ class Bot_start():
 
         else:
             print "Checking Config File\t:\t" + conf.configCheck()
-            sys.exit(0)
-
-        sql_check = mysql.mysql_check(self.db_host, self.db_username, self.db_password, self.db_name)
-
-        if sql_check == "OK":
-            print "Connecting To DB\t:\t" + sql_check
-        else:
-            print "Connecting To DB\t:\t" + sql_check
             sys.exit(0)
 
         print "Bestoon Bot Started, Now Let's Get To Work!"
