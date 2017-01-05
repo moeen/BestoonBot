@@ -7,16 +7,17 @@
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
 from settings.conf import conf
+import os, sys
 
 conf = conf()
 updater = Updater(str(conf.token()))
-SETUP ,USERNAME = range(2)
+SETUP ,USERNAME,DUPLICATE = range(3)
 info = []
 
 def info_a():
     """ Writes User Data Into A File"""
     file_name = str(str(info[0])+".txt")
-    with open ("bestoon/Plugins/tmp/%s" % file_name, mode="w") as f:
+    with open ("bestoon/Plugins/users/%s" % file_name, mode="w") as f:
         f.write(str(info[0]) + "," + str(info[1]))
         f.close()
 
@@ -39,13 +40,19 @@ Now, How Can I Help You?
 def setup(bot, update):
     """Initialize The User Account For The First Time"""
     if update.message.text == "Integrate An Account":
-        info.append(update.message.from_user.id)
-        bot.sendChatAction(chat_id, "TYPING")
-        register_text = """Ok.
+        user = update.message.from_user
+        info.append(user.id)
+        userfile = str(user.id) + ".txt"
+        if os.path.isfile("bestoon/Plugins/users/%s" % userfile) == False:
+            bot.sendChatAction(chat_id, "TYPING")
+            register_text = """Ok.
 Now Send Me Your Token.
 """
-        update.message.reply_text(register_text,reply_markup=ReplyKeyboardRemove())
-        return USERNAME
+            update.message.reply_text(register_text,reply_markup=ReplyKeyboardRemove())
+            return USERNAME
+        else:
+            update.message.reply_text("It Seems This Telegram ID Has Been Integrated Before\nWould You Like To Integrate Again?")
+            return DUPLICATE
 
     elif update.message.text == "Register New Account":
         bot.sendChatAction(chat_id, "TYPING")
