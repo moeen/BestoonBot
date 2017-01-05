@@ -9,22 +9,10 @@ class Bot_start():
     def __init__(self):
         self.token = conf.token()
 
-        try:
-            self.db_host = conf.ConfigSectionMap("database", "settings/conf.ini")["host"].strip("\"")
-            self.db_username = conf.ConfigSectionMap("database", "settings/conf.ini")["user"].strip("\"")
-            self.db_password = conf.ConfigSectionMap("database", "settings/conf.ini")["password"].strip("\"")
-            self.db_name = conf.ConfigSectionMap("database", "settings/conf.ini")["db_name"].strip("\"")
-
-        except:
-            self.db_host = None
-            self.db_username = None
-            self.db_password = None
-            self.db_name = None
-
 
     def main(self):
         os.system("clear")
-        
+
         print "==============================="
         print "Starting Bestoon Bot!"
         print "==============================="
