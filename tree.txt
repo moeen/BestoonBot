@@ -1,10 +1,9 @@
 BestoonBot
 ├── bestoon
-│   ├── extPlugins
-│   │   └── __init__.py
 │   ├── __init__.py
 │   └── Plugins
-│       └── __init__.py
+│       ├── __init__.py
+│       └── users
 ├── bestoon.py
 ├── LICENSE
 ├── README.md
@@ -12,8 +11,7 @@ BestoonBot
 ├── settings
 │   ├── conf.py
 │   ├── conf-sample.ini
-│   ├── __init__.py
-│   └── sql.py
+│   └── __init__.py
 └── tree.txt
 
-4 directories, 12 files
+4 directories, 10 files
