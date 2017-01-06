@@ -7,9 +7,12 @@
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
 from settings.conf import conf
-import os, sys
+import os, sys, subprocess
 
 conf = conf()
+base_url = conf.configParser("bot", "settings/conf.ini", "base_url").strip("/")
+income_url = str(base_url) + "/submit/income/"
+expense_url = str(base_url) + "/submit/expense/"
 updater = Updater(str(conf.token()))
 SETUP, USERNAME, DUPLICATE, BESTOON, DONE = range(5)
 info = []
@@ -18,11 +21,12 @@ def info_a():
     """ Writes User Data Into A File"""
     file_name = str(str(info[0])+".txt")
     with open ("bestoon/Plugins/users/%s" % file_name, mode="w") as f:
-        f.write(str(info[0]) + "," + str(info[1]))
+        f.write(str(info[1]))
         f.close()
 
 def start_method(bot, update):
     """ Start Command """
+
     startList = [["Register New Account","Integrate An Account"]]
 
     global chat_id
@@ -39,6 +43,7 @@ Now, How Can I Help You?
 
 def setup(bot, update):
     """Initialize The User Account For The First Time"""
+
     if update.message.text == "Integrate An Account":
         user = update.message.from_user
         info.append(user.id)
@@ -66,6 +71,8 @@ Now Send Me Your Token.
         update.message.reply_text("Invalid Command!")
 
 def regUser(bot, update):
+    """ Register User """
+
     txt = update.message.text
     if len(txt) == 48:
         info.append(txt)
@@ -77,6 +84,8 @@ def regUser(bot, update):
         update.message.reply_text("Sorry, This Token Is Invalid\nPlease Retry With A Valid Token.")
 
 def remove_user(bot, update):
+    """ Remove User Data For Restarting """
+
     text = update.message.text
     user = update.message.from_user
     if text.lower() == "yes":
@@ -90,28 +99,61 @@ def cancel(bot, update):
     """ Cancel Command """
     bot.sendMessage(update.message.chat_id, "Bye!")
     return ConversationHandler.END
+
 def done(bot, update):
+    """ Finishsing Intgration """
     bot.sendChatAction(update.message.chat_id, "TYPING")
     update.message.reply_text("You Can Now Use /income <value> and /expense <value> For Submiting Your Income And Expense.", reply_markup=  ReplyKeyboardRemove())
     return BESTOON
-def expense(bot, update):
-    bot.sendMessage(update.message.chat_id, "expense")
+
+def expense(bot, update, args):
+    """ Expense Command """
+
+    file_name = str(str(update.message.chat_id)+".txt")
+    with open ("bestoon/Plugins/users/%s" % file_name, mode="r") as f:
+        line = f.readlines()
+        f.close()
+
+    user_token = line[0]
+    bot.sendChatAction(update.message.chat_id, "TYPING")
+    bash = os.popen("./Shell/bestoonexpense.sh %s %s %s" %(user_token, args[0], args[1])).read()
+    
+    if star bash == "{\"status\": \"ok\"}":
+        bot.sendMessage(update.message.chat_id,'Success!')
+    else:
+        bot.sendMessage(update.message.chat_id,'Error!')
+
+
 def income(bot, update):
+    """ Income Command """
     bot.sendMessage(update.message.chat_id, "Income")
 
 conv_handler = ConversationHandler(
-    entry_points = [CommandHandler('start', start_method)],
+    entry_points = [CommandHandler('start', start_method),CommandHandler("expense", expense, pass_args=True),
+    CommandHandler("income", income)],
 
     states = {
-        SETUP: [MessageHandler(Filters.text, setup)],
-        USERNAME: [MessageHandler(Filters.text, regUser)],
-        DUPLICATE: [MessageHandler(Filters.text, remove_user)],
-        DONE: [MessageHandler(Filters.text, done)],
-        BESTOON: [CommandHandler("expense", expense),
+        SETUP: [MessageHandler(Filters.text, setup),
+        CommandHandler("expense", expense, pass_args=True),
+        CommandHandler("income", income)],
+
+        USERNAME: [MessageHandler(Filters.text, regUser),
+        CommandHandler("expense", expense, pass_args=True),
+        CommandHandler("income", income)],
+
+        DUPLICATE: [MessageHandler(Filters.text, remove_user),
+        CommandHandler("expense", expense, pass_args=True),
+        CommandHandler("income", income)],
+
+        DONE: [MessageHandler(Filters.text, done),
+        CommandHandler("expense", expense, pass_args=True),
+        CommandHandler("income", income)],
+
+        BESTOON: [CommandHandler("expense", expense, pass_args=True),
         CommandHandler("income", income)]
     },
 
-    fallbacks = [CommandHandler('start', start_method)]
+    fallbacks = [CommandHandler('cancel', cancel)]
 )
 updater.dispatcher.add_handler(conv_handler)
 ########## Starting Bot ##########
