@@ -112,45 +112,73 @@ def expense(bot, update, args):
     file_name = str(str(update.message.chat_id)+".txt")
     with open ("bestoon/Plugins/users/%s" % file_name, mode="r") as f:
         line = f.readlines()
-        f.close()
+    f.close()
 
     user_token = line[0]
     bot.sendChatAction(update.message.chat_id, "TYPING")
     bash = os.popen("./Shell/bestoonexpense.sh %s %s %s" %(user_token, args[0], args[1])).read()
-    
-    if star bash == "{\"status\": \"ok\"}":
-        bot.sendMessage(update.message.chat_id,'Success!')
-    else:
-        bot.sendMessage(update.message.chat_id,'Error!')
 
+    bot.sendMessage(update.message.chat_id, str(bash))
 
-def income(bot, update):
+def income(bot, update, args):
     """ Income Command """
-    bot.sendMessage(update.message.chat_id, "Income")
+
+    file_name = str(str(update.message.chat_id)+".txt")
+    with open ("bestoon/Plugins/users/%s" % file_name, mode="r") as f:
+        line = f.readlines()
+    f.close()
+
+    user_token = line[0]
+    bot.sendChatAction(update.message.chat_id, "TYPING")
+    bash = os.popen("./Shell/bestoonincome.sh %s %s %s" %(user_token, args[0], args[1])).read()
+
+    bot.sendMessage(update.message.chat_id, str(bash))
+
+def stat(bot, update):
+    """ Stat Command """
+
+    file_name = str(str(update.message.chat_id)+".txt")
+    with open ("bestoon/Plugins/users/%s" % file_name, mode="r") as f:
+        line = f.readlines()
+    f.close()
+
+    user_token = line[0]
+    bot.sendChatAction(update.message.chat_id, "TYPING")
+    bash = os.popen("./Shell/bestoonstat.sh %s" %(user_token)).read()
+    print bash
+    bot.sendMessage(update.message.chat_id, str(bash))
+
 
 conv_handler = ConversationHandler(
-    entry_points = [CommandHandler('start', start_method),CommandHandler("expense", expense, pass_args=True),
-    CommandHandler("income", income)],
+    entry_points = [CommandHandler('start', start_method),
+    CommandHandler("expense", expense, pass_args=True),
+    CommandHandler("income", income, pass_args=True),
+    CommandHandler("stat", stat)],
 
     states = {
         SETUP: [MessageHandler(Filters.text, setup),
         CommandHandler("expense", expense, pass_args=True),
-        CommandHandler("income", income)],
+        CommandHandler("income", income, pass_args=True),
+        CommandHandler("stat", stat)],
 
         USERNAME: [MessageHandler(Filters.text, regUser),
         CommandHandler("expense", expense, pass_args=True),
-        CommandHandler("income", income)],
+        CommandHandler("income", income, pass_args=True),
+        CommandHandler("stat", stat)],
 
         DUPLICATE: [MessageHandler(Filters.text, remove_user),
         CommandHandler("expense", expense, pass_args=True),
-        CommandHandler("income", income)],
+        CommandHandler("income", income, pass_args=True),
+        CommandHandler("stat", stat)],
 
         DONE: [MessageHandler(Filters.text, done),
         CommandHandler("expense", expense, pass_args=True),
-        CommandHandler("income", income)],
+        CommandHandler("income", income, pass_args=True),
+        CommandHandler("stat", stat)],
 
         BESTOON: [CommandHandler("expense", expense, pass_args=True),
-        CommandHandler("income", income)]
+        CommandHandler("income", income, pass_args=True),
+        CommandHandler("stat", stat)]
     },
 
     fallbacks = [CommandHandler('cancel', cancel)]
